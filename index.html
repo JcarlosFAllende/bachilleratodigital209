@@ -1371,7 +1371,7 @@ rel="stylesheet">
         <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
           <div class="row">
             <div class="col-sm-6">
-              <form name="contact" method="POST" data-netlify="true">
+              <form name="contact" id="form" method="POST" data-netlify="true">
                 <div class="row  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -1420,7 +1420,26 @@ rel="stylesheet">
       </div>
     </div>        
   </section><!--/#contact-->
-  
+    <script>
+    const $form = document.querySelector('#form')
+    $form.addEventListener('Submit', handleSubmit)
+
+    async function handleSubmit(event){
+     event.preventDefault()
+     const form = new FormData(this)
+     const response =await fetch(this.action,{
+       method: this.method,
+       body: form,
+       headers: {
+         'Accept':'aplication/json'
+       }
+     })
+     if (response.ok){
+        this.reset()
+        alert('Gracias por contactarse, te escribiremos pronto')
+     }
+    }
+  </script>
   <script  src="js/script2.js"></script>
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
